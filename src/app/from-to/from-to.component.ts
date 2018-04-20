@@ -16,8 +16,8 @@ export class FromToComponent implements OnInit {
   public toUsers=["A","B"];
   public message="";
   public tempAmount=0;
-  public senderBalance=40000;
-  public recieverBalance=40000;
+  public senderBalance=0;
+  public recieverBalance=0;
   public oldSenderBalance=0;
   public oldRecieverBalance=0;
   public showDetails=false;
@@ -44,16 +44,18 @@ export class FromToComponent implements OnInit {
   eliminateFromUser()
   {
     
-    this.fromUsers=this.users.filter((user)=>user!==this.model.to);
+    this.recieverBalance=this._fromToService.getBalance(this.model.to).balance;
+    // this.fromUsers=this.users.filter((user)=>user!==this.model.to);
   }
   eliminateToUser()
   {
-    
+    this.senderBalance=this._fromToService.getBalance(this.model.from).balance;
     this.toUsers=this.users.filter((user)=>user!==this.model.from);
-    if(this.toUsers.length==1)
-    {
-      this.model.to=this.toUsers[0];
-    }
+    // if(this.toUsers.length==1)
+    // {
+    //   this.recieverBalance=this._fromToService.getBalance(this.model.to).balance;
+    //   this.model.to=this.toUsers[0];
+    // }
   }
   submitState()
   {

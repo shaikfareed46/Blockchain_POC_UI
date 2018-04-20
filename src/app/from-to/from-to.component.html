@@ -1,19 +1,28 @@
-<div *ngIf="showDetails" class="text-info h3" style="position: absolute;margin-left: 4%;">
+<div *ngIf="showDetails" class="text-info h3" style="position: absolute;margin-left: 15%;">
+  <h1 class="text-danger">
+    <u>Old Balance</u>
+  </h1>
+  <br>
   <h3>
-    Old Balance of {{model.from}} = ${{oldSenderBalance}}
+    {{model.from}} = ${{oldSenderBalance}}
   </h3>
-  <br><br><br>
+  
   <h3>
-      New Balance of {{model.from}} = ${{senderBalance}}
+      {{model.to}} = ${{oldRecieverBalance}}
+   
   </h3>
 </div>
-<div *ngIf="showDetails" class="text-info h3" style="position: absolute;margin-left: 70%;">
+<div *ngIf="showDetails" class="text-info h3" style="position: absolute;margin-left: 75%;">
+    <h1 class="text-danger">
+        <u>New Balance</u>
+      </h1>
+      <br>
   <h3>
-      Old Balance of {{model.to}} = ${{oldRecieverBalance}}
+      {{model.from}} = ${{senderBalance}}
     </h3>
-    <br><br><br>
+    
     <h3>
-        New Balance of {{model.to}} = ${{recieverBalance}}
+        {{model.to}} = ${{recieverBalance}}
     </h3>
 </div>
 
@@ -22,7 +31,7 @@
   <form class="form-signin" (ngSubmit)="onSubmit()">
     <h2 class="form-signin-heading">Enter Details</h2>
     <div class='form-group'>
-        <label  for="to">
+        <label  for="from">
           <span style="font-size:20px">Sender</span> 
           <span *ngIf="model.from" class="text-success h4" style="margin-left: 80px">
                   Balance = ${{senderBalance}}
@@ -34,6 +43,7 @@
         </span>
         <!-- <input type="text" [(ngModel)]='model.from' class="form-control" id="from" name="from" placeholder="From" required autofocus /> -->
         <select name="from" id="from" [(ngModel)]='model.from' (change)='eliminateToUser()' required class="form-control"> 
+            <option  selected value> -- select a User -- </option>
             <option *ngFor="let user of fromUsers" [value]="user">{{user}}</option>
         </select>
       </div>
@@ -50,8 +60,9 @@
             <i class="fa fa-address-book-o"a style="font-size:24px" aria-hidden="true"></i>
           </span>
           <!-- <input type="text" [(ngModel)]='model.to' class="form-control" id="to" name="to" placeholder="To" required/>-->
-          <select name="to" id="to" [(ngModel)]='model.to' class="form-control" required> 
+          <select name="to" id="to" [(ngModel)]='model.to' (change)='eliminateFromUser()' class="form-control" required> 
               <!-- <select name="to" id="to" [(ngModel)]='model.to' (change)='eliminateFromUser()' class="form-control"> -->
+                  <option  selected value> -- select a user -- </option>
           <option *ngFor="let user of toUsers" [value]="user">{{user}}</option>
           
         </select> 
